@@ -1,0 +1,25 @@
+{
+  "name": "pa2",
+  "version": "0.0.0",
+  "description": "Programm Assignment 2 - VEFF2",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/maggragg/pa2.git"
+  },
+  "keywords": [
+    "chatprogram"
+  ],
+  "author": "Magnus og Margret",
+  "license": "BSD",
+  "gitHead": "e4cf9407161036f6abf515cf27e48e66396479cd"
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2"
+  }
+}
