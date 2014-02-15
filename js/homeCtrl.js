@@ -1,26 +1,44 @@
+//Login and new user
 angular.module("ChatApp").controller("HomeCtrl", 
-[ "$scope", "$http",
-	function($scope, $http){
-		var socket = io.connect("http://localhost:8080");
-		
-		$scope.nick = "";
-		$scope.loggedIn = false;
+[ "$scope", "SOCKET_URL", "$location", "SocketService",
 
+	function($scope, SOCKET_URL, $location, SocketService){
+		var socket = io.connect(SOCKET_URL);
+    	$scope.username = "";
+	    $scope.message = "";
+
+		$scope.connect = function() 
+		{
+			if(socket) 
+			{
+				socket.emit("adduser", $scope.username, function(available) {
+					if(available) {
+						SocketService.setConnected(socket);
+						SocketService.setUsername($scope.username);
+                        //Get chat room list
+						socket.emit("rooms");
+
+						console.log("logged in");
+					}
+					else {
+						$scope.message = "Your name is taken, please choose another";
+					}
+					$scope.$apply();
+				});
+			}
+		};
+        
+        // on get chat room list
 		socket.on("roomlist", function(data){
-			console.log(data); 
 			$scope.$apply(function(){
-				$scope.rooms = data;	
+				$scope.rooms = data;
+				
+				console.log(data);	
 			})
 		});
 
-		$scope.login = function(){
-			socket.emit("adduser", $scope.nick, function(available){
-    			if (available){
-        			// The "dabs" username is not taken!
-        			$scope.loggedIn = true; 
-        			socket.emit("rooms");
-    			}
-			});
-		};
 	}
+
 ]);
+
+	

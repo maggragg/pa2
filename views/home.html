@@ -1,14 +1,15 @@
-<h2>Welcome to chat!</h2>
+<h1>Please choose a username:</h1>
 
+<input ng-model="username" placeholder="Insert name here">
 
-<div ng-hide="loggedIn">
-	<input type="text" required="required" ng-model="nick"></input>
-	<button ng-click="login()">Login</button>
-</div>
+<button ng-click="connect()">Connect!</button>
+
+<p ng-bind="message"></p>
 
 <ul>
-	<li ng-repeat="room in rooms">
-		{{room.topic}}
-	</li>
+    <li ng-repeat="room in rooms">
+    	<a href="#/rooms/{{ room.topic }}">
+    	{{room.topic}} </a> 
+    </li>
 </ul>
 
