@@ -1,8 +1,20 @@
 <h1>Please choose a username:</h1>
 
-<input ng-model="username" placeholder="Insert name here">
+<form name="loginForm">
+	<input type="text" 
+		name="username"
+		ng-model="username" 
+		placeholder="Insert name here"
+		required="required"
+		ng-minlength="2"
+		ng-maxlength="32" />
 
-<button ng-click="connect()">Connect!</button>
+	<section class="warning" ng-show="username.$invalid">
+		<small>Username not valid</small>
+	</section>
+
+	<button ng-click="connect()">Connect!</button>
+</form>
 
 <p ng-bind="message"></p>
 
