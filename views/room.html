@@ -1,5 +1,5 @@
 <div class="container">
-	<h1>Welcome to {{ roomid }}</h1>
+	<h1> {{ roomName }}</h1>
 	<div class="well">
 		<div class="row">
 			<div class="col-md-9 col-xs-9">
@@ -27,4 +27,5 @@
 	</div>
 	<input ng-model="currentMessage" class="form-control" ng-keypress="keyPress($event)" />
 	<button ng-click="send()">Send!</button>
+
 </div>

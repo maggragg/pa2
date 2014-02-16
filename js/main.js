@@ -4,9 +4,9 @@ angular.module("ChatApp")
 .config(function($routeProvider){
 
 	$routeProvider.when("/index", {
-		templateUrl: "/views/home.html",
-		controller: "HomeCtrl"
-	}).when("/rooms/:roomid", {
+		templateUrl: "/views/login.html",
+		controller: "LoginCtrl"
+	}).when("/rooms/:roomName", {
 		templateUrl: "/views/room.html", 
 		controller: "RoomCtrl"
 	}).otherwise({redirectTo: "/index"});

@@ -1,0 +1,24 @@
+<h1>Please choose a username:</h1>
+
+<input ng-model="username" placeholder="Insert name here">
+
+<button ng-click="connect()">Connect!</button>
+
+<p ng-bind="message"></p>
+
+<ul>
+    <li ng-repeat="room in rooms">
+    	<a href="#/rooms/{{ room.topic }}">
+    	{{room.topic}} </a> 
+    </li>
+</ul>
+
+   
+<br> 
+<br> 
+
+<h3>Create new chat</h3>
+<input ng-model="newChatName" placeholder="Type chat name here">
+<br> 
+<br> 
+<button ng-click="createNewRoom()">Create new chat</button>
