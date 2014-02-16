@@ -8,15 +8,14 @@ angular.module("ChatApp").controller("RoomCtrl",
 
 		var socket = SocketService.getSocket();
 
-		console.log("Open room");
-
 		if(socket) {
-			socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
-
-			});
+			if($scope.roomName !== ""){
+				socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
+					if(success === false){ $scope.message = errorMessage; }
+				});
+			}
 
 			socket.on("updatechat", function(roomname, messageHistory) {
-				console.log(messageHistory);
 				$scope.messages = messageHistory;
 				$scope.$apply();
 			});
@@ -24,13 +23,13 @@ angular.module("ChatApp").controller("RoomCtrl",
 			socket.on("updateusers", function(room, users) {
 				if(room === $scope.roomName) {
 					$scope.users = users;
+  					$scope.$apply();
 				}
 			});
 		}
 
 		$scope.send = function() {
 			if(socket) {
-				console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
 				socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
 				$scope.currentMessage = "";
 			}
