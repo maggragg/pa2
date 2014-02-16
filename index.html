@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Angular Chat</title>
 
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -25,10 +26,19 @@
 
     </head>
     <body>
+
+        <header>
+            
+        </header>
         
-        <div ng-view>       
+        <div id="main" ng-view>       
 
         </div>
+
+        <footer>
+            <p>Program Assignment 2 - VEFF2 - Háskólinn í Reykjavík</p>
+            <p>Copyright - Magnús Ragnarsson --- Margrét Harðardóttir - 2014</p>
+        </footer>
         
     </body>
 </html>

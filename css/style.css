@@ -1,14 +1,17 @@
 * {
 	margin: 0px;
 	padding: 0px;
-	border-style: solid;
+}
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
 }
 
 body {
 	margin-left: auto;
 	margin-right: auto;
-	width: 800px;
-	font-family: calibri;
 }
 
 header {
@@ -20,15 +23,25 @@ header {
 
 #main {
 	border-color: blue;
-	border-width: 5px;
-	height: 600px;
+	border-width: 1px;
+	min-height: 400px;
 
+}
+
+form {
+	padding: 30px;
+	border: dotted #adadad 1px;
 }
 
 footer {
 	margin: 5px;
 	padding: 20px;
-	border-width: 1px;
-	border-color: red;
+	border-top: dotted #adadad 1px;
 	clear: both;
+}
+
+footer p {
+	font-size: 10px;
+	text-align: center;
+	padding: 2px;
 }
