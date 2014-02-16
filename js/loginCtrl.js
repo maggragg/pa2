@@ -6,7 +6,7 @@ angular.module("ChatApp").controller("LoginCtrl",
 		var socket = io.connect(SOCKET_URL);
     	$scope.username = "";
 	    $scope.message = "";
-	    var isConnected = false;
+	    $scope.isLoggedIn = false;
 
 		$scope.connect = function() 
 		{
@@ -18,7 +18,7 @@ angular.module("ChatApp").controller("LoginCtrl",
 						SocketService.setUsername($scope.username);
                         //Get chat room list
 						socket.emit("rooms");
-						isConnected = true; 
+						$scope.isLoggedIn = true; 
 					}
 					else {
 						$scope.message = "Your name is taken, please choose another";
@@ -29,7 +29,7 @@ angular.module("ChatApp").controller("LoginCtrl",
 		};
 
 		$scope.createNewRoom = function(){
-			if(isConnected) 
+			if($scope.isLoggedIn) 
 			{
 				//Bý til nýtt chat
 				socket.emit("joinroom", { room: $scope.newChatName, pass: "" }, function(success, errorMessage) {

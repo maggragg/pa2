@@ -1,24 +1,46 @@
-<h1>Please choose a username:</h1>
+<div class="container">
 
-<input ng-model="username" placeholder="Insert name here">
+    <div ng-hide="isLoggedIn">
+	  	<form class="form-signin" role="form">
+	    	<h2 class="form-signin-heading">Please sign in</h2>
+	        <input ng-model="username" type="text" class="form-control" placeholder="Type name here" required autofocus>
+	        
+	        <label class="checkbox">
+	            <input type="checkbox" value="remember-me"> Remember me
+	        </label>
+	        
+	        <button ng-click="connect()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	       
+	        <p ng-bind="message"></p>
+	      
+	    </form>
+    </div>
 
-<button ng-click="connect()">Connect!</button>
+    <div ng-show="isLoggedIn">
+		<div class="page-header">
+		    <h2>Avaliable chat rooms</h2>
+		</div>
+		<div class="row">
+	        <div class="col-sm-4">
+	            <ul class="list-group">
+	                <li ng-repeat="room in rooms" class="list-group-item">
+	          	        <a href="#/rooms/{{ room.topic }}">
+	      	            {{room.topic}} </a> 
+	                </li>
+	            </ul>
+	        </div><!-- /.col-sm-4 -->
+		</div>
 
-<p ng-bind="message"></p>
+		<div class="page-header">
+		    <h3>Create new chat</h3>
+		</div>
 
-<ul>
-    <li ng-repeat="room in rooms">
-    	<a href="#/rooms/{{ room.topic }}">
-    	{{room.topic}} </a> 
-    </li>
-</ul>
+		<div class="well">
+	    	<input ng-model="newChatName" type="text" class="form-control" placeholder="Type chat name here">
+		    <br>
+	        <button ng-click="createNewRoom()" class="btn btn-lg" type="submit">Create</button>
+		</div>
+	</div>
 
-   
-<br> 
-<br> 
+</div> <!-- container -->
 
-<h3>Create new chat</h3>
-<input ng-model="newChatName" placeholder="Type chat name here">
-<br> 
-<br> 
-<button ng-click="createNewRoom()">Create new chat</button>
