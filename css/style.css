@@ -21,11 +21,48 @@ header {
 	padding: 20px;
 }
 
-#main {
+main {
 	border-color: blue;
 	border-width: 1px;
 	min-height: 400px;
 
+}
+
+nav {
+
+	float: left;
+	min-width: 20%
+}
+
+aside {
+	width: 20%;
+	float: right;
+}
+
+aside ul {
+	dislay: block;
+}
+
+#chatBoard {
+
+	min-height: 200px;
+	width: 80%;
+	background-color: #adadad;
+	float: left;
+	overflow: auto;
+}
+
+footer {
+	margin: 5px;
+	padding: 20px;
+	border-top: dotted #adadad 1px;
+	clear: both;
+}
+
+footer p {
+	font-size: 10px;
+	text-align: center;
+	padding: 2px;
 }
 
 form {
@@ -53,17 +90,4 @@ input.ng-invalid {
 }
 input.ng-valid {
   border: 1px solid green;
-}
-
-footer {
-	margin: 5px;
-	padding: 20px;
-	border-top: dotted #adadad 1px;
-	clear: both;
-}
-
-footer p {
-	font-size: 10px;
-	text-align: center;
-	padding: 2px;
 }

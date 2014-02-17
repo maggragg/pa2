@@ -1,41 +1,45 @@
 <div class="container">
 
-    <div ng-hide="isLoggedIn">
+<!--Login section with forms-->
+
+    <section ng-hide="isLoggedIn">
 	  	<form name="logInForm" class="form-signin" role="form">
 	  		<fieldset>
-	  			<legend>Login</legend>
-	    	<h2 class="form-signin-heading">Please sign in</h2>
-	        <input type="text"
-	        	name="username"
-	        	ng-model="username" 
-	        	class="form-control" 
-	        	placeholder="Type name here" 
-	        	required="required" 
-	        	autofocus="autofocus" />
-	        	<br />
+	  			<legend>Please sign in</legend>
+	    		<!--<h2 class="form-signin-heading">Please sign in</h2>-->
+	        	<input type="text"
+	        		name="username"
+	        		ng-model="username" 
+	        		class="form-control" 
+	        		placeholder="Type name here" 
+	        		required="required" 
+	        		autofocus="autofocus" />
+	        		<br />
 	        
-	        <input type="checkbox"
-	            name="checkbox"
-	            id="checkbox_id"
-	            value="remember-me" />
-	        <label for="checkbox_id" class="checkbox">Remember me</label>
+	        	<input type="checkbox"
+	            	name="checkbox"
+	            	id="checkbox_id"
+	            	value="remember-me" />
+	       		<label for="checkbox_id" class="checkbox">Remember me</label>
 	        
-	        <button type="submit"
-	        	ng-click="connect()" 
-	        	class="btn btn-lg btn-primary btn-block">
-	        	Sign in
-	        </button>
+	        	<button type="submit"
+	        		ng-click="connect()" 
+	        		class="btn btn-lg btn-primary btn-block">
+	        		Sign in
+	        	</button>
 	       
-	        <p ng-bind="message"></p>
+	        	<mark ng-bind="message"></mark>
 	      	</fieldset>
 	    </form>
-    </div>
+    </section>
 
-    <div ng-show="isLoggedIn">
+<!--  -->
+
+    <section ng-show="isLoggedIn">
 		<div class="page-header">
 		    <h2>Avaliable chat rooms</h2>
 		</div>
-		<div class="row">
+		<nav class="row">
 	        <div class="col-sm-4">
 	            <ul class="list-group">
 	                <li ng-repeat="room in rooms" class="list-group-item">
@@ -44,7 +48,7 @@
 	                </li>
 	            </ul>
 	        </div><!-- /.col-sm-4 -->
-		</div>
+		</nav>
 
 		<div class="page-header">
 		    <h3>Create new chat</h3>
@@ -69,7 +73,7 @@
 
 	       </form>
 		</div>
-	</div>
+	</section>
 
 </div> <!-- container -->
 
