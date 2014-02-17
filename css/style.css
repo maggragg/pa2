@@ -29,8 +29,30 @@ header {
 }
 
 form {
-	padding: 30px;
+	padding: 20px;
 	border: dotted #adadad 1px;
+}
+
+fieldset {
+	padding: 10px;
+}
+
+input {
+	margin: 5px;
+}
+
+
+button {
+	margin: 5px;
+	padding: 3px;
+	display: block;
+}
+
+input.ng-invalid {
+  border: 2px solid red;
+}
+input.ng-valid {
+  border: 1px solid green;
 }
 
 footer {
