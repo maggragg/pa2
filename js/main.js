@@ -3,11 +3,14 @@
 angular.module("ChatApp")
 .config(function($routeProvider){
 
-	$routeProvider.when("/index", {
-		templateUrl: "/views/login.html",
-		controller: "LoginCtrl"
-	}).when("/rooms/:roomName", {
-		templateUrl: "/views/room.html", 
-		controller: "RoomCtrl"
+	$routeProvider.when("/", {
+		templateUrl: "views/login.html",
+		controller: "LoginCtrl",
+	}).when("/roomList", {
+		templateUrl: "views/roomList.html",
+		controller: "RoomListCtrl",
+	}).when("/room/:roomName", {
+		templateUrl: "views/room.html",
+		controller: "RoomCtrl",
 	}).otherwise({redirectTo: "/index"});
 });

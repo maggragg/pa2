@@ -22,8 +22,8 @@
 			<aside class="col-md-3 col-xs-3">
 				<p>Users</p>
 				<ul>
-					<li ng-repeat="user in users" ng-hide="user == userInRoom">>
-						<button class="btn btn-link" data-toggle="modal" data-target="#privateMsgModal" >
+					<li ng-repeat="user in users" ng-hide="user == userInRoom">
+						<button class="submit btn-link" data-toggle="modal" data-target="#privateMsgModal" ng-click="setPrivateMsgUser(user)" >
 						{{ user }}
 						</button>
 					</li>
@@ -46,7 +46,7 @@
 						      </div>
 					      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="submit" class="btn btn-primary" ng-click="sendPrivateMessage(userName)">Send</button>
+				        <button type="submit" class="btn btn-primary" ng-click="sendPrivateMessage(privateMsgUser)">Send</button>
 				      </div>
 				    </div>
 				  </div>

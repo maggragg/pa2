@@ -8,6 +8,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.userInRoom = SocketService.getUsername();
 
 		var socket = SocketService.getSocket();
+		var privateMsgUser = "";
 
 		if(socket) {
 			if($scope.roomName !== ""){
@@ -19,7 +20,6 @@ angular.module("ChatApp").controller("RoomCtrl",
 			socket.on("updatechat", function(roomname, messageHistory) {
 				$scope.messages = messageHistory;
 				$scope.$apply();
-				console.log(messageHistory);
 			});
 
 			socket.on("updateusers", function(room, users) {
@@ -72,13 +72,22 @@ angular.module("ChatApp").controller("RoomCtrl",
 			}
 		};
 
-		$scope.sendPrivateMessage = function(userName){
+		$scope.setPrivateMsgUser = function(userName){
+			if(socket) {
+				$scope.privateMsgUser = userName;
+				console.log("Set private msg user");
+				console.log($scope.privateMsgUser);
+			}
+		};
+
+		$scope.sendPrivateMessage = function(){
 			//if(socket) {
 			//	console.log("Sending private message");
 			//	console.log($scope.privateMessage);
-			//	console.log(userName);
-			//	socket.emit("privatemsg", { nick: userName, message: $scope.privateMessage });
+			//	console.log($scope.privateMsgUser);
+			//	socket.emit("privatemsg", { nick: $scope.privateMsgUser, message: $scope.privateMessage }, function(success));
 			//	$scope.privateMessage = "";
+			//	$scope.privateMsgUser = "";
 			//	$('#privateMsgModal').modal('hide');
 			//}
 		};
@@ -86,7 +95,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.leaveRoom = function() {
 			if(socket) {
 				socket.emit("partroom", $scope.roomName);
-			    $location.path("/login");
+			    $location.path("/roomList");
 			}
 		};
 	}
