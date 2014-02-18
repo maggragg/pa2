@@ -1,10 +1,11 @@
 //Chat controller
 angular.module("ChatApp").controller("RoomCtrl", 
-[ "$scope", "$routeParams", "SocketService",  
-	function($scope, $routeParams, SocketService){
+[ "$scope", "$routeParams", "$location", "SocketService",  
+	function($scope, $routeParams, $location, SocketService){
 
 		$scope.roomName = $routeParams.roomName;
 		$scope.currentMessage = "";
+		$scope.userInRoom = SocketService.getUsername();
 
 		var socket = SocketService.getSocket();
 
@@ -18,6 +19,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 			socket.on("updatechat", function(roomname, messageHistory) {
 				$scope.messages = messageHistory;
 				$scope.$apply();
+				console.log(messageHistory);
 			});
 
 			socket.on("updateusers", function(room, users) {
@@ -25,6 +27,35 @@ angular.module("ChatApp").controller("RoomCtrl",
 					$scope.users = users;
   					$scope.$apply();
 				}
+			});
+
+			socket.on("recv_privatemsg", function(user, message){
+				console.log("Getting private message");
+				console.log(message);
+			});
+
+			socket.on("serverMessage", function(msgType, room, userAfected){
+				if (SocketService.getUsername() !== userAfected){
+
+					if (msgType === "join"){
+						$scope.popUpMessage = userAfected + " has joined the chat room!";
+					}
+					else if(msgType === "part"){
+						$scope.popUpMessage = userAfected + " has left the chat room!";
+					}
+					else if(msgType === "quit"){
+						$scope.popUpMessage = userAfected + " has left the chat!";
+					}
+					//$scope.$apply();
+				}	
+				else if(SocketService.getUsername() === userAfected)
+				{ 
+					if(msgType === "kicked"){
+						$scope.popUpMessage = "You have been kicked out of the chat!";
+					}
+					//$scope.$apply();
+				}
+    			// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
 			});
 		}
 
@@ -41,6 +72,23 @@ angular.module("ChatApp").controller("RoomCtrl",
 			}
 		};
 
+		$scope.sendPrivateMessage = function(userName){
+			//if(socket) {
+			//	console.log("Sending private message");
+			//	console.log($scope.privateMessage);
+			//	console.log(userName);
+			//	socket.emit("privatemsg", { nick: userName, message: $scope.privateMessage });
+			//	$scope.privateMessage = "";
+			//	$('#privateMsgModal').modal('hide');
+			//}
+		};
+
+		$scope.leaveRoom = function() {
+			if(socket) {
+				socket.emit("partroom", $scope.roomName);
+			    $location.path("/login");
+			}
+		};
 	}
 ]);
 
