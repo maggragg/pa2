@@ -25,7 +25,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 			socket.on("updateusers", function(room, users) {
 				if(room === $scope.roomName) {
 					$scope.users = users;
-  					$scope.$apply();
+					$scope.$apply();
 				}
 			});
 
@@ -55,7 +55,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 					}
 					//$scope.$apply();
 				}
-    			// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
+				// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
 			});
 		}
 
@@ -95,7 +95,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.leaveRoom = function() {
 			if(socket) {
 				socket.emit("partroom", $scope.roomName);
-			    $location.path("/roomList");
+				$location.path("/roomList");
 			}
 		};
 	}

@@ -4,8 +4,8 @@ angular.module("ChatApp").controller("RoomListCtrl",
 
 	function($scope, SOCKET_URL, $location, SocketService){
 		var socket = io.connect(SOCKET_URL);
-    	$scope.username = "";
-	    $scope.message = "";
+		$scope.username = "";
+		$scope.message = "";
 
 		// If the user is logged in
         // on get chat room list from chatserver
