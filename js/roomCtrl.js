@@ -99,6 +99,14 @@ angular.module("ChatApp").controller("RoomCtrl",
 				$location.path("/roomList");
 			}
 		};
+
+		$scope.kickUser = function() {
+			if(socket) {
+				socket.emit("kick", $scope.roomnName, function(allowed) {
+					if(allowed === false){ $scope.message = errorMessage; }
+				});
+			}
+		}
 	}
 ]);
 
