@@ -25,6 +25,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 			socket.on("updateusers", function(room, users) {
 				if(room === $scope.roomName) {
 					$scope.users = users;
+					$scope.userInRoom = SocketService.getUsername();
 					$scope.$apply();
 				}
 			});
