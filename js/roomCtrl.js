@@ -6,7 +6,8 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.roomName = $routeParams.roomName;
 		$scope.currentMessage = "";
 		$scope.userInRoom = SocketService.getUsername();
-		$scope.userName = "";
+		$scope.alerts = [];	 
+        $scope.userName = "";
 
 		var socket = SocketService.getSocket();
 		var privateMsgUser = "";
@@ -27,13 +28,13 @@ angular.module("ChatApp").controller("RoomCtrl",
 				if(room === $scope.roomName) {
 					$scope.users = users;
 					$scope.userInRoom = SocketService.getUsername();
-					$scope.$apply();
+  					$scope.$apply();
 				}
 			});
 
-			socket.on("recv_privatemsg", function(user, message){
-				console.log("Getting private message");
-				console.log(message);
+			socket.on("recv_privatemsg", function(userTo, message){
+	  			$scope.alerts.push({msg: message});
+    			$scope.$apply();
 			});
 
 			socket.on("serverMessage", function(msgType, room, userAfected){
@@ -63,9 +64,13 @@ angular.module("ChatApp").controller("RoomCtrl",
 					}
 					//$scope.$apply();
 				}
-				// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
+    			// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
 			});
 		}
+
+  		$scope.closeAlert = function(index) {
+    		$scope.alerts.splice(index, 1);
+  		};
 
 		$scope.send = function() {
 			if(socket) {
@@ -83,30 +88,25 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.setPrivateMsgUser = function(userName){
 			if(socket) {
 				$scope.privateMsgUser = userName;
-				console.log("Set private msg user");
-				console.log($scope.privateMsgUser);
 			}
 		};
 
 		$scope.sendPrivateMessage = function(){
-			//if(socket) {
-			//	console.log("Sending private message");
-			//	console.log($scope.privateMessage);
-			//	console.log($scope.privateMsgUser);
-			//	socket.emit("privatemsg", { nick: $scope.privateMsgUser, message: $scope.privateMessage }, function(success));
-			//	$scope.privateMessage = "";
-			//	$scope.privateMsgUser = "";
-			//	$('#privateMsgModal').modal('hide');
-			//}
+			if(socket) {
+				socket.emit("privatemsg", { nick: $scope.privateMsgUser, message: $scope.privateMessage }, function(success){
+					if(success === false){ $scope.message = errorMessage; } 
+				});
+				$scope.privateMsgUser = "";
+				$('#privateMsgModal').modal('hide');
+			}
 		};
 
 		$scope.leaveRoom = function() {
 			if(socket) {
 				socket.emit("partroom", $scope.roomName);
-				$location.path("/roomList");
+			    $location.path("/roomList");
 			}
 		};
-
 		$scope.kickUser = function() {
 			if(socket) {
 				socket.emit("kick", {user: $scope.userName, room: $scope.roomName}, function(allowed) {
@@ -124,6 +124,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 				console.log("kickUser");
 			}
 		}
+
 	}
 ]);
 

@@ -4,8 +4,8 @@ angular.module("ChatApp").controller("LoginCtrl",
 
 	function($scope, SOCKET_URL, $location, SocketService){
 		var socket = io.connect(SOCKET_URL);
-			$scope.username = "";
-			$scope.message = "";
+    	$scope.username = "";
+	    $scope.message = "";
 
 		$scope.connect = function() 
 		{
