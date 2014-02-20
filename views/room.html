@@ -29,6 +29,7 @@
 						<button class="submit btn-link" data-toggle="modal" data-target="#privateMsgModal" ng-click="setPrivateMsgUser(user)" >
 						{{user }}
 						</button>
+						<!--Admin dropdown menu-->
 						<span class="btn-group pull-right">
 							<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" >
 							Admin <span class="caret"></span>
@@ -39,6 +40,7 @@
 								<li ng-click="MakeOp(user)">*Make {{user}} Op</li>
 							</ul>
 						</span>
+						<!-- -->
 					</li>
 				</ul>
 				
@@ -54,7 +56,7 @@
 						    	<input type="text"
 						    		name="privateMessage"
 						    		ng-model="privateMessage" 
-						    		autofocus="autofocus"
+						    		autofocus="autofocus" 
 						    		class="form-control"
 						    		placeholder="Type message here" />
 
