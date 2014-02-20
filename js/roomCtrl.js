@@ -8,6 +8,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.userInRoom = SocketService.getUsername();
 		$scope.alerts = [];	 
         $scope.userName = "";
+        $scope.popUpMessage = "";
 
 		var socket = SocketService.getSocket();
 		var privateMsgUser = "";
@@ -111,21 +112,23 @@ angular.module("ChatApp").controller("RoomCtrl",
 			    console.log("LeaveRoom")
 			}
 		};
-		$scope.kickUser = function() {
+		$scope.kickUser = function(userName) {
 			if(socket) {
-				socket.emit("kick", {user: $scope.userName, room: $scope.roomName}, function(allowed) {
+				socket.emit("kick", {user: userName, room: $scope.roomName}, function(allowed) {
 					if(allowed === false){ $scope.message = errorMessage; }
 				});
-				console.log("kickUser");
+				console.log("kickUser: " + userName);
+				console.log($scope.message);
 			}
 		}
 
-		$scope.banUser = function() {
+		$scope.banUser = function(userName) {
 			if(soceket) {
-				socket.emit("ban", {user: $scope.userName, room: $scope.roomName}, function(allowed) {
+				socket.emit("ban", {user: userName, room: $scope.roomName}, function(allowed) {
 					if(allowed === false){ $scope.message = errorMessage; }
 				});
-				console.log("banUser");
+				console.log("banUser: " + userName);
+				console.log($scope.message);
 			}
 		}
 

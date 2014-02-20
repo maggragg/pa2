@@ -29,6 +29,16 @@
 						<button class="submit btn-link" data-toggle="modal" data-target="#privateMsgModal" ng-click="setPrivateMsgUser(user)" >
 						{{user }}
 						</button>
+						<span class="btn-group pull-right">
+							<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" >
+							Admin <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li ng-click="kickUser(user)">Kick {{user}}</li>
+								<li ng-click="banUser(user)">Ban {{user}}</li>
+								<li ng-click="MakeOp(user)">*Make {{user}} Op</li>
+							</ul>
+						</span>
 					</li>
 				</ul>
 				
