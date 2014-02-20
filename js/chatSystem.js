@@ -1,6 +1,6 @@
 //Global module
 //Declares the angular application and it's dependencies
-angular.module("ChatApp", ["ng", "ngRoute"]);
+angular.module("ChatApp", ["ng", "ngRoute", "ngDropdowns"]);
 
 //System constants 
 angular.module("ChatApp").constant("SOCKET_URL", "http://localhost:8080");

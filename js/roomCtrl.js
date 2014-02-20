@@ -33,7 +33,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 			});
 
 			socket.on("recv_privatemsg", function(userTo, message){
-	  			$scope.alerts.push({msg: message});
+	  			$scope.alerts.push({msg: message, usr: userTo});
     			$scope.$apply();
 			});
 
@@ -61,6 +61,9 @@ angular.module("ChatApp").controller("RoomCtrl",
 				{ 
 					if(msgType === "kicked"){
 						$scope.popUpMessage = "You have been kicked out of the chat!";
+					}
+					else if(msgType === "banned"){
+						$scope.popUpMessage = "You have been banned from the chat!";
 					}
 					//$scope.$apply();
 				}
@@ -105,6 +108,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 			if(socket) {
 				socket.emit("partroom", $scope.roomName);
 			    $location.path("/roomList");
+			    console.log("LeaveRoom")
 			}
 		};
 		$scope.kickUser = function() {
@@ -121,7 +125,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 				socket.emit("ban", {user: $scope.userName, room: $scope.roomName}, function(allowed) {
 					if(allowed === false){ $scope.message = errorMessage; }
 				});
-				console.log("kickUser");
+				console.log("banUser");
 			}
 		}
 

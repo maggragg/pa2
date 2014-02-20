@@ -27,7 +27,7 @@
 					</li>
 					<li ng-repeat="user in users" ng-hide="user == userInRoom">
 						<button class="submit btn-link" data-toggle="modal" data-target="#privateMsgModal" ng-click="setPrivateMsgUser(user)" >
-						{{ user }}
+						{{user }}
 						</button>
 					</li>
 				</ul>
@@ -44,8 +44,10 @@
 						    	<input type="text"
 						    		name="privateMessage"
 						    		ng-model="privateMessage" 
-						    		class="form-control" 
+						    		autofocus="autofocus"
+						    		class="form-control"
 						    		placeholder="Type message here" />
+
 						      </div>
 					      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -73,7 +75,7 @@
 	    <br>
 		<div class="alert alert-info alert-dismissable" ng-repeat="alert in alerts">
   			<button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="closeAlert($index)">&times;</button>
-  			<strong>Private message!</strong> {{alert.msg}}
+  			<strong>Private message!</strong> [{{alert.usr}}]: {{alert.msg}}
 		</div>
 	</footer>
 
