@@ -7,8 +7,8 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.currentMessage = "";
 		$scope.userInRoom = SocketService.getUsername();
 		$scope.alerts = [];	 
-        $scope.userName = "";
         $scope.popUpMessage = "";
+        $scope.privateMsgUser = "";
 
 		var socket = SocketService.getSocket();
 		var privateMsgUser = "";
@@ -16,7 +16,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		if(socket) {
 			if($scope.roomName !== ""){
 				socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
-					if(success === false){ $scope.message = errorMessage; }
+					if(success === false){ $scope.message = "You could not join this chat room!"; }
 				});
 			}
 
@@ -38,46 +38,49 @@ angular.module("ChatApp").controller("RoomCtrl",
 				$scope.$apply();
 			});
 
-			socket.on("kicked", function(room, user, op){
-				console.log(op + " kicked " + user + " from " + room);
-				//$location.path("/roomList");
-			});
-
-			socket.on("banned", function(room, user, op){
-				console.log(op + " banned " + user + " from " + room);
-				//$location.path("/roomList");
-			});
-
-			socket.on("serverMessage", function(msgType, room, userAfected){
-				if (SocketService.getUsername() !== userAfected){
-
-					if (msgType === "join"){
-						$scope.popUpMessage = userAfected + " has joined the chat room!";
-					}
-					else if(msgType === "part"){
-						$scope.popUpMessage = userAfected + " has left the chat room!";
-					}
-					else if(msgType === "quit"){
-						$scope.popUpMessage = userAfected + " has left the chat!";
-					}
-					else if(msgType === "kicked"){
-						$scope.popUpMessage = userAfected + "was kicked from the chat room!";
-					}
-					else if(msgType === "banned"){
-						$scope.popUpMessage = userAfected + "was banned from the chat room!";
-					}
-					//$scope.$apply();
-				}	
-				else if(SocketService.getUsername() === userAfected)
-				{ 
-					if(msgType === "kicked"){
-						$scope.popUpMessage = "You have been kicked out of the chat!";
-					}
-					else if(msgType === "banned"){
-						$scope.popUpMessage = "You have been banned from the chat!";
-					}
-					//$scope.$apply();
+			socket.on("kicked", function(kickedRoom, kickedUser, userName){
+				if (SocketService.getUsername() === kickedUser){
+					$scope.popUpMessage = "You have been kicked from this chat by " + userName + "!"
+					$location.path("/roomList");
 				}
+				else{
+					$scope.popUpMessage = userName + " has been kicked from the chat room by" + userName +  "!"
+				}
+				$scope.$apply();
+				$(".alert").fadeOut(3000 );
+			});
+
+			socket.on("banned", function(banRoom, banUser, userName){
+				if (SocketService.getUsername() === kickedUser){
+					$scope.popUpMessage = "You have been banned from this chat by " + userName + "!"
+					$location.path("/roomList");
+				}
+				else{
+					$scope.popUpMessage = userName + " has been banned from the chat room by" + userName +  "!"
+				}
+				$scope.$apply();
+				$(".alert").fadeOut(3000 );
+			});
+
+			socket.on("servermessage", function(msgType, room, userAfected){
+				if (msgType === "join"){
+					$scope.popUpMessage = userAfected + " has joined the chat room!";
+				}
+				else if(msgType === "part"){
+					$scope.popUpMessage = userAfected + " has left the chat room!";
+				}
+				else if(msgType === "quit"){
+					$scope.popUpMessage = userAfected + " has left the chat!";
+				}
+				console.log("Server message");
+				console.log(msgType);
+				console.log(room);
+				console.log(userAfected);
+
+				$scope.$apply();
+				$(".alert").fadeOut(3000 );
+
+				//$scope.$apply();
 				// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
 			});
 		}
@@ -108,7 +111,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.sendPrivateMessage = function(){
 			if(socket) {
 				socket.emit("privatemsg", { nick: $scope.privateMsgUser, message: $scope.privateMessage }, function(success){
-					if(success === false){ $scope.message = errorMessage; } 
+					if(success === false){ $scope.message = "Not possible to send private message!"; } 
 				});
 				$scope.privateMsgUser = "";
 				$('#privateMsgModal').modal('hide');
@@ -122,11 +125,11 @@ angular.module("ChatApp").controller("RoomCtrl",
 				console.log("LeaveRoom");
 			}
 		};
+
 		$scope.kickUser = function(userName) {
 			if(socket) {
 				socket.emit("kick", {user: userName, room: $scope.roomName}, function(allowed) {
-					if(allowed === false){ $scope.message = errorMessage;
-					console.log($scope.message);
+					if(allowed === false){ $scope.message = "You cannot kick this user from the chat room!";
 					}
 				});
 				console.log("kickUser: " + userName);
@@ -136,8 +139,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.banUser = function(userName) {
 			if(soceket) {
 				socket.emit("ban", {user: userName, room: $scope.roomName}, function(allowed) {
-					if(allowed === false){ $scope.message = errorMessage;
-					console.log($scope.message);
+					if(allowed === false){ $scope.message = "You cannot ban this user for the chat room!";
 					}
 				});
 				console.log("banUser: " + userName);

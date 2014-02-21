@@ -1,5 +1,6 @@
 <div class="container">
-	<h1> {{ roomName }}</h1>
+	<h1> {{ roomName }} </h1>
+	<h2> user logged in: {{userInRoom}} </h2>
 	<div class="well">
 		<div class="row">
 
@@ -22,13 +23,12 @@
 			<aside class="col-md-3 col-xs-3">
 				<p>Users</p>
 				<ul>
-					<li>
-						{{userInRoom}}
-					</li>
 					<li ng-repeat="user in users" ng-hide="user == userInRoom">
 						<button class="submit btn-link" data-toggle="modal" data-target="#privateMsgModal" ng-click="setPrivateMsgUser(user)" >
 						{{user }}
 						</button>
+
+
 						<!--Admin dropdown menu-->
 						<span class="btn-group pull-right">
 							<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" >
@@ -37,7 +37,6 @@
 							<ul class="dropdown-menu">
 								<li ng-click="kickUser(user)">Kick {{user}}</li>
 								<li ng-click="banUser(user)">Ban {{user}}</li>
-								<li ng-click="MakeOp(user)">*Make {{user}} Op</li>
 							</ul>
 						</span>
 						<!-- -->
@@ -83,6 +82,11 @@
 	        ng-click="leaveRoom()">
 	        Leave
 	    </button>
+	    <br>
+	    <br>
+		<div class="alert alert-error alert-dismissable" ng-bind="popUpMessage">
+  			<strong>Important message!</strong> <span ng-bind="popUpMessage"></span>!
+		</div>
 	    <br>
 	    <br>
 		<div class="alert alert-info alert-dismissable" ng-repeat="alert in alerts">
