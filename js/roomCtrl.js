@@ -25,17 +25,28 @@ angular.module("ChatApp").controller("RoomCtrl",
 				$scope.$apply();
 			});
 
-			socket.on("updateusers", function(room, users) {
+			socket.on("updateusers", function(room, users, ops) {
 				if(room === $scope.roomName) {
 					$scope.users = users;
+					$scope.ops = ops;
 					$scope.userInRoom = SocketService.getUsername();
-  					$scope.$apply();
+					$scope.$apply();
 				}
 			});
 
 			socket.on("recv_privatemsg", function(userTo, message){
-	  			$scope.alerts.push({msg: message, usr: userTo});
-    			$scope.$apply();
+				$scope.alerts.push({msg: message, usr: userTo});
+				$scope.$apply();
+			});
+
+			socket.on("kicked", function(room, user, op){
+				console.log(op + " kicked " + user + " from " + room);
+				//$location.path("/roomList");
+			});
+
+			socket.on("banned", function(room, user, op){
+				console.log(op + " banned " + user + " from " + room);
+				//$location.path("/roomList");
 			});
 
 			socket.on("serverMessage", function(msgType, room, userAfected){
@@ -68,13 +79,13 @@ angular.module("ChatApp").controller("RoomCtrl",
 					}
 					//$scope.$apply();
 				}
-    			// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
+				// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
 			});
 		}
 
-  		$scope.closeAlert = function(index) {
-    		$scope.alerts.splice(index, 1);
-  		};
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
 
 		$scope.send = function() {
 			if(socket) {
@@ -108,8 +119,8 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.leaveRoom = function() {
 			if(socket) {
 				socket.emit("partroom", $scope.roomName);
-			    $location.path("/roomList");
-			    console.log("LeaveRoom")
+				$location.path("/roomList");
+				console.log("LeaveRoom");
 			}
 		};
 		$scope.kickUser = function(userName) {
@@ -120,7 +131,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 				console.log("kickUser: " + userName);
 				console.log($scope.message);
 			}
-		}
+		};
 
 		$scope.banUser = function(userName) {
 			if(soceket) {
@@ -130,7 +141,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 				console.log("banUser: " + userName);
 				console.log($scope.message);
 			}
-		}
+		};
 
 	}
 ]);
