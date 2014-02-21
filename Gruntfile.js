@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         },
         js : {
             src : ['js/*'],
-            dest : 'combined.js'
+            dest : 'build/chatclient.js'
         }
     },
     cssmin: {
@@ -24,8 +24,9 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        src: 'build/chatclient.js',
+        //src: 'src/<%= pkg.name %>.js',
+        dest: 'build/chatclient.min.js'
       }
     },
     jshint: {

@@ -25,10 +25,9 @@ angular.module("ChatApp").controller("RoomCtrl",
 				$scope.$apply();
 			});
 
-			socket.on("updateusers", function(room, users, ops) {
+			socket.on("updateusers", function(room, users) {
 				if(room === $scope.roomName) {
 					$scope.users = users;
-					$scope.ops = ops;
 					$scope.userInRoom = SocketService.getUsername();
 					$scope.$apply();
 				}
@@ -126,20 +125,22 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.kickUser = function(userName) {
 			if(socket) {
 				socket.emit("kick", {user: userName, room: $scope.roomName}, function(allowed) {
-					if(allowed === false){ $scope.message = errorMessage; }
+					if(allowed === false){ $scope.message = errorMessage;
+					console.log($scope.message);
+					}
 				});
 				console.log("kickUser: " + userName);
-				console.log($scope.message);
 			}
 		};
 
 		$scope.banUser = function(userName) {
 			if(soceket) {
 				socket.emit("ban", {user: userName, room: $scope.roomName}, function(allowed) {
-					if(allowed === false){ $scope.message = errorMessage; }
+					if(allowed === false){ $scope.message = errorMessage;
+					console.log($scope.message);
+					}
 				});
 				console.log("banUser: " + userName);
-				console.log($scope.message);
 			}
 		};
 
