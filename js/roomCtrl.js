@@ -40,23 +40,23 @@ angular.module("ChatApp").controller("RoomCtrl",
 
 			socket.on("kicked", function(kickedRoom, kickedUser, userName){
 				if (SocketService.getUsername() === kickedUser){
-					$scope.popUpMessage = "You have been kicked from this chat by " + userName + "!"
+					$scope.popUpMessage = "You have been kicked from this chat by " + userName + "!";
 					$location.path("/roomList");
 				}
 				else{
-					$scope.popUpMessage = userName + " has been kicked from the chat room by" + userName +  "!"
+					$scope.popUpMessage = userName + " has been kicked from the chat room by" + userName +  "!";
 				}
 				$scope.$apply();
 				$(".alert").fadeOut(3000 );
 			});
 
-			socket.on("banned", function(banRoom, banUser, userName){
-				if (SocketService.getUsername() === kickedUser){
-					$scope.popUpMessage = "You have been banned from this chat by " + userName + "!"
+			socket.on("banned", function(banRoom, bannedUser, userName){
+				if (SocketService.getUsername() === bannedUser){
+					$scope.popUpMessage = "You have been banned from this chat room by " + userName + " !";
 					$location.path("/roomList");
 				}
 				else{
-					$scope.popUpMessage = userName + " has been banned from the chat room by" + userName +  "!"
+					$scope.popUpMessage = userName + " has been banned from the chat room by " + userName +  " !";
 				}
 				$scope.$apply();
 				$(".alert").fadeOut(3000 );
@@ -137,7 +137,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		};
 
 		$scope.banUser = function(userName) {
-			if(soceket) {
+			if(socket) {
 				socket.emit("ban", {user: userName, room: $scope.roomName}, function(allowed) {
 					if(allowed === false){ $scope.message = "You cannot ban this user for the chat room!";
 					}

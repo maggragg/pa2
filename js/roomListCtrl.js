@@ -46,8 +46,8 @@ angular.module("ChatApp").controller("RoomListCtrl",
 				$location.path("/");
 			}
 		};
+	
 	}
-
 ]);
 
 	

@@ -1,0 +1,26 @@
+{
+  "name": "pa2",
+  "version": "0.0.0",
+  "homepage": "https://github.com/maggragg/pa2",
+  "authors": [
+    "Magnus Ragnarsson <magnus@ru.is>"
+  ],
+  "main": "js/main.js",
+  "keywords": [
+    "chatclient"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "~1.2.12",
+    "angular": "~1.2.12",
+    "bootstrap": "~3.1.0",
+    "sizzle": "1.10.16",
+  }
+}
