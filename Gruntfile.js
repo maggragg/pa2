@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 
      watch: {
       files: ['css/*', 'js/*', '*.html'],
-      tasks: ['concat', 'cssmin', 'uglify', 'copy']
+      tasks: ['concat', 'uglify', 'copy']
 
    },
    connect: {
@@ -84,6 +84,6 @@ module.exports = function(grunt) {
     );
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat:js', 'concat:css', 'cssmin', 'uglify', 'copy']);
+  grunt.registerTask('default', ['jshint', 'concat:js', 'uglify', 'copy']);
 
 };
