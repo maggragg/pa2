@@ -25,7 +25,9 @@ angular.module("ChatApp").controller("LoginCtrl",
 				});
 			}
 		};
+
 	}
+
 ]);
 
 	

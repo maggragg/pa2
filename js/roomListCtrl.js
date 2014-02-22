@@ -8,7 +8,7 @@ angular.module("ChatApp").controller("RoomListCtrl",
 		$scope.message = "";
 
 		// If the user is logged in
-        // on get chat room list from chatserver
+        // get chat room list from chatserver
 		if(socket) {
 			socket.emit("rooms");
 
@@ -21,6 +21,10 @@ angular.module("ChatApp").controller("RoomListCtrl",
 		else {
 			$location.path("/");
 		}
+
+		$scope.setCurrentRoom = function(room){
+			SocketService.setChatRoom(room); 
+		};
 
 		$scope.createNewRoom = function(){
 			if(socket) 
@@ -37,17 +41,17 @@ angular.module("ChatApp").controller("RoomListCtrl",
 			}			
 		};
         
-	$scope.logOut = function(){
-		if(socket)
-			 {
+		$scope.logOut = function(){
+			if(socket)
+			{
 				//log out
 				socket.emit("disconnect");
 				console.log("logOut");
 				$location.path("/");
 			}
 		};
-	
 	}
+
 ]);
 
 	
