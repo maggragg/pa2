@@ -45,7 +45,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 					$location.path("/roomList");
 				}
 				else{
-					$scope.poppUpMessage = userName + " has been kicked from the chat room by" + userName +  "!";
+					$scope.poppUpMessage = kickedUser + " has been kicked from the chat room by " + userName +  " !";
 
 				}
 				$scope.$apply();
@@ -59,7 +59,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 					$location.path("/roomList");
 				}
 				else{
-					$scope.poppUpMessage = userName + " has been banned from the chat room by" + userName +  "!";
+					$scope.poppUpMessage = banUser+ " has been banned from the chat room by " + userName +  " !";
 				}
 				$scope.$apply();
 				$("#chatMessage").show();
