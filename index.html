@@ -7,20 +7,16 @@
         <title>Angular Chat</title>
 
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet">
-        <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+        <link href="css/signin.css" rel="stylesheet">
 
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!--<script src="bower_components/bootstrap/dist/js/bootstrap-transition.js"></script>-->
-        <!--<script src="bower_components/bootstrap/dist/js/bootstrap-modal.js"></script>-->        
 
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="http://localhost:8080/socket.io/socket.io.js"></script>
         
-        <script src="js/chatclient.min.js"></script>
+        <script src="build/chatclient.min.js"></script>
         <!--<script src="js/chatSystem.js"></script>
         <script src="js/loginCtrl.js"></script>
         <script src="js/roomListCtrl.js"></script>
@@ -29,6 +25,19 @@
 
         <link rel="author" href="humans.txt">
 
+        <style type="text/css">
+            html {
+                position: relative;
+                min-height: 100%;
+                }
+            #content {
+                padding-bottom: 50px;
+                }
+            #footer .navbar{
+                position: absolute;
+                }
+        </style>
+
     </head>
     <body>
 
@@ -36,16 +45,29 @@
             
         </header>
         
-        <main ng-view>
+        <div id="content"> 
 
-        </main>
+            <main ng-view>       
 
-        <!--<footer class="footer">
-            <br>
-            <br>
-            <p>Program Assignment 2 - VEFF2 - Háskólinn í Reykjavík</p>
-            <p>Copyright - Magnús Ragnarsson - Margrét Harðardóttir - 2014</p>
-        </footer>-->
-        
+            </main>
+
+        </div>
+
+        <div id="footer">
+          <div class="row text-center">  
+              <div class="navbar navbar-fixed-bottom">
+                <div class="navbar-inner">
+                  <div class="container">
+                    <ul class="nav">
+                      <li><p class="muted credit">Program Assignment 2 - VEFF2 - Háskólinn í Reykjavík</p></li>
+                      <li><p class="muted credit">Magnús Ragnarsson - Margrét Harðardóttir - 2014</p></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
     </body>
+        
 </html>

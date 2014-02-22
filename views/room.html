@@ -60,8 +60,8 @@
 
 						      </div>
 					      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="submit" class="btn btn-primary" ng-click="sendPrivateMessage()">Send</button>
+				        <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+				        <button type="submit" class="btn btn-sm btn-primary" ng-click="sendPrivateMessage()">Send</button>
 				      </div>
 				    </div>
 				  </div>
@@ -74,12 +74,16 @@
                             
     <footer>
 		<input ng-model="currentMessage" class="form-control" ng-keypress="keyPress($event)" />
-		<button ng-click="send()">Send!</button>
+		<br/>
+		<button class="btn btn-sm btn-primary"
+		        type="submit"
+		        ng-click="send()">Send!
+		</button>
 
-	    <button type="submit"
-	        name="leaveRoom"
-	        ng-click="leaveRoom()">
-	        Leave
+	    <button class="btn btn-sm btn-primary"
+	            type="submit"
+	        	name="leaveRoom"
+	        	ng-click="leaveRoom()">Leave
 	    </button>
 	    <br>
 	    <br>
