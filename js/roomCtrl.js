@@ -76,7 +76,6 @@ angular.module("ChatApp").controller("RoomCtrl",
 				if (SocketService.getUsername() === banUser){
 					$scope.poppUpMessage = "You have been banned from this chat by " + userName + "!";
 					$location.path("/roomList");
-					$location.path("/roomList");
 				}
 				else{
 					$scope.poppUpMessage = banUser + " has been banned from the chat room by" + userName +  "!";
@@ -105,7 +104,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 			});
 		}
 
-		// when alert message is closed remove the alert tiem from tha alert array
+		// when alert message is closed remove the alert item from tha alert array
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
@@ -118,7 +117,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 			}
 		};
 
-		// handles enter key, calls send message 
+		// handles enter key, call send message 
 		$scope.keyPress = function($event) {
 			if($event.keyCode === 13) {
 				$scope.send();

@@ -12,16 +12,28 @@ angular.module("ChatApp").controller("RoomListCtrl",
 		if(socket) {
 			socket.emit("rooms");
 
+			// server sending roomlist
 			socket.on("roomlist", function(roomList) {
 				$scope.roomList = [];
 				$scope.rooms = roomList;
 				$scope.$apply();
 			});
+
+			// server message join handled to get new room list 
+			socket.on("servermessage", function(msgType, room, userAfected){
+				if(SocketService.getUsername() !== userAfected){
+					if (msgType === "join"){
+						socket.emit("rooms");
+					}
+				}
+			});
+
 		}
 		else {
 			$location.path("/");
 		}
 
+		// create new room
 		$scope.createNewRoom = function(){
 			if(socket) 
 			{
@@ -37,12 +49,11 @@ angular.module("ChatApp").controller("RoomListCtrl",
 			}			
 		};
         
+        // leave chat room
 		$scope.logOut = function(){
 			if(socket)
 			{
-				//log out
 				socket.emit("disconnect");
-				console.log("logOut");
 				$location.path("/");
 			}
 		};
