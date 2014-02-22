@@ -1,34 +1,33 @@
 <div class="container">
-
 <!--Login section with forms-->
 
-	  	<form name="logInForm" class="form-signin" role="form">
-	  		<fieldset>
-	  			<legend>Please sign in</legend>
-	    		<!--<h2 class="form-signin-heading">Please sign in</h2>-->
-	        	<input type="text"
-	        		name="username"
-	        		ng-model="username" 
-	        		class="form-control" 
-	        		placeholder="Type name here" 
-	        		required="required" 
-	        		autofocus="autofocus" />
-	        		<br />
+	<form name="logInForm" class="form-signin col-lg-3" role="form">
+	  	<fieldset>
+	  		<legend>Please sign in</legend>
+	    	<!--<h2 class="form-signin-heading">Please sign in</h2>-->
+	        <input type="text"
+	        	name="username"
+	        	ng-model="username" 
+	        	class="form-control" 
+	        	placeholder="Type name here" 
+	        	required="required" 
+	        	autofocus="autofocus" />
+	        	<br />
 	        
-	        	<label class="checkbox">
-	        		<input type="checkbox"
-	            	value="remember-me" />
-	       			Remember me
-	       		</label>
+	        <label class="checkbox">
+	        	<input type="checkbox"
+	            value="remember-me" />
+	       		Remember me
+	       	</label>
 	        
-	        	<button type="submit"
-	        		ng-click="connect()" 
-	        		class="btn btn-lg btn-primary btn-block">
-	        		Sign in
-	        	</button>
+	        <button type="submit"
+	        	ng-click="connect()" 
+	        	class="btn btn-lg btn-primary btn-block">
+	        	Sign in
+	        </button>
 	       
-	        	<mark ng-bind="message"></mark>
-	      	</fieldset>
-	    </form>
-
+	        <mark ng-bind="message"></mark>
+	      </fieldset>
+	</form>
+	
 </div> <!-- container -->

@@ -7,18 +7,14 @@
         <title>Angular Chat</title>
 
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link href="css/signin.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
 
-        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
         <script src="http://localhost:8080/socket.io/socket.io.js"></script>
         
-        <script src="build/chatclient.min.js"></script>
+        <script src="js/chatclient.js"></script>
         <!--<script src="js/chatSystem.js"></script>
         <script src="js/loginCtrl.js"></script>
         <script src="js/roomListCtrl.js"></script>
@@ -26,20 +22,6 @@
         <script src="js/main.js"></script>-->
 
         <link rel="author" href="humans.txt">
-
-        <style type="text/css">
-            html {
-                position: relative;
-                min-height: 100%;
-                }
-            #content {
-                padding-bottom: 50px;
-                }
-            #footer .navbar{
-                position: absolute;
-                }
-        </style>
-
     </head>
     <body>
 
@@ -48,11 +30,8 @@
         </header>
         
         <div id="content"> 
-
             <main ng-view>       
-
             </main>
-
         </div>
 
         <div id="footer">
