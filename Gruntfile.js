@@ -3,20 +3,30 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    copy: {
+      main: {
+        files: [
+          // includes files within path
+          {expand: true, src: ['views/*.html'], dest: 'dist/'},
+          {expand: true, src: ['*.html'], dest: 'dist/'},
+          {expand: true, src: ['bower_components/**'], dest: 'dist/'}
+        ]
+      }
+    },
     concat: {
         css: {
            src: ['css/*'],
-            dest: 'combined.css'
+            dest: 'css/combined.css'
         },
         js : {
             src : ['js/*'],
-            dest : 'build/chatclient.js'
+            dest : 'dist/js/chatclient.js'
         }
     },
     cssmin: {
             css: {
-                src: 'combined.css',
-                dest: 'combined.min.css'
+                src: 'css/combined.css',
+                dest: 'dist/css/style.min.css'
             }
         },
     uglify: {
@@ -24,9 +34,9 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'build/chatclient.js',
+        src: 'dist/js/chatclient.js',
         //src: 'src/<%= pkg.name %>.js',
-        dest: 'build/chatclient.min.js'
+        dest: 'dist/js/chatclient.min.js'
       }
     },
     jshint: {
@@ -42,25 +52,38 @@ module.exports = function(grunt) {
          }
        }
      },
+
      watch: {
-      files: ['css/*', 'js/*'],
-      tasks: ['concat', 'cssmin', 'uglify']
-   }
+      files: ['css/*', 'js/*', '*.html'],
+      tasks: ['concat', 'cssmin', 'uglify', 'copy']
+
+   },
+   connect: {
+    server: {
+      options: {
+        port: 8000,
+        base: 'dist',
+        liveroload: 'true',
+        keepalive: 'true',
+        open: 'true'
+      }
+    }
+  }
   });
 
-
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
 
   grunt.registerTask('test', ['jshint']
     );
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat:js', 'concat:css', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'concat:js', 'concat:css', 'cssmin', 'uglify', 'copy']);
 
 };
