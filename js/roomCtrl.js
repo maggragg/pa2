@@ -57,6 +57,13 @@ angular.module("ChatApp").controller("RoomCtrl",
 				$scope.$apply();
 			});
 
+			socket.on("updatetopic", function(room, topic, user){
+				$routeParams.roomName = topic;
+				$scope.newTopic = "";
+				$scope.poppUpMessage = "Topic has been changed to " + topic;
+				$scope.$apply();
+			});
+
 			// user beeing kicked from the room by operator of a room
 			socket.on("kicked", function(kickedRoom, kickedUser, userName){
 				if (SocketService.getUsername() === kickedUser){
@@ -174,7 +181,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.changeTopic = function() {
 			if(socket) {
 				socket.emit("settopic", {room: $scope.roomName, topic: $scope.newTopic}, function(allowed) {
-					if(allowed === false){ $scope.message = "You cannot topic on this room!";
+					if(allowed === false){ $scope.message = "You cannot change topic on this room!";
 					}
 				console.log("Topic changed to " + $scope.newTopic);
 
