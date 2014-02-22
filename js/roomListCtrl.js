@@ -22,10 +22,6 @@ angular.module("ChatApp").controller("RoomListCtrl",
 			$location.path("/");
 		}
 
-		$scope.setCurrentRoom = function(room){
-			SocketService.setChatRoom(room); 
-		};
-
 		$scope.createNewRoom = function(){
 			if(socket) 
 			{

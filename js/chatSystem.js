@@ -5,7 +5,7 @@ angular.module("ChatApp", ["ng", "ngRoute"]);
 //System constants 
 angular.module("ChatApp").constant("SOCKET_URL", "http://localhost:8080");
 
-
+//Socket connection and current suer
 angular.module("ChatApp").factory("SocketService", ["$http", function($http) {
 	var username = "";
 	var socket;
@@ -23,12 +23,6 @@ angular.module("ChatApp").factory("SocketService", ["$http", function($http) {
 		getSocket: function() {
 			return socket;
 		}, 
-		setChatRoom: function(room){
-			chatRoom = room;
-		}, 
-		getChatRoom: function(){
-			return chatRoom; 
-		}
 	};
 }]);
 

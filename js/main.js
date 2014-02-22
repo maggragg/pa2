@@ -1,7 +1,7 @@
 
 //Main, links together html views and controllers
-angular.module("ChatApp").config(["$routeProvider", 
-		function($routeProvider){
+angular.module("ChatApp")
+.config(function($routeProvider){
 
 	$routeProvider.when("/", {
 		templateUrl: "views/login.html",
@@ -13,5 +13,4 @@ angular.module("ChatApp").config(["$routeProvider",
 		templateUrl: "views/room.html",
 		controller: "RoomCtrl",
 	}).otherwise({redirectTo: "/index"});
-
-}]);
+});
