@@ -9,6 +9,7 @@ angular.module("ChatApp").constant("SOCKET_URL", "http://localhost:8080");
 angular.module("ChatApp").factory("SocketService", ["$http", function($http) {
 	var username = "";
 	var socket;
+	var chatRoom;
 	return {
 		setConnected: function(theSocket) {
 			socket = theSocket;
@@ -21,6 +22,12 @@ angular.module("ChatApp").factory("SocketService", ["$http", function($http) {
 		},
 		getSocket: function() {
 			return socket;
+		}, 
+		setChatRoom: function(room){
+			chatRoom = room;
+		}, 
+		getChatRoom: function(){
+			return chatRoom; 
 		}
 	};
 }]);
