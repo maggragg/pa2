@@ -7,8 +7,9 @@ angular.module("ChatApp").controller("RoomCtrl",
 		$scope.currentMessage = "";
 		$scope.userInRoom = SocketService.getUsername();
 		$scope.alerts = [];	 
-        $scope.popUpMessage = "";
+        $scope.poppUpMessage = "";
         $scope.privateMsgUser = "";
+        $("#chatMessage").hide();
 
 		var socket = SocketService.getSocket();
 		var privateMsgUser = "";
@@ -28,7 +29,6 @@ angular.module("ChatApp").controller("RoomCtrl",
 			socket.on("updateusers", function(room, users) {
 				if(room === $scope.roomName) {
 					$scope.users = users;
-					$scope.userInRoom = SocketService.getUsername();
 					$scope.$apply();
 				}
 			});
@@ -40,48 +40,46 @@ angular.module("ChatApp").controller("RoomCtrl",
 
 			socket.on("kicked", function(kickedRoom, kickedUser, userName){
 				if (SocketService.getUsername() === kickedUser){
-					$scope.popUpMessage = "You have been kicked from this chat by " + userName + "!"
+					$scope.poppUpMessage = "You have been kicked from this chat by " + userName + "!"
 					$location.path("/roomList");
 				}
 				else{
-					$scope.popUpMessage = userName + " has been kicked from the chat room by" + userName +  "!"
+					$scope.poppUpMessage = userName + " has been kicked from the chat room by" + userName +  "!"
 				}
-				$scope.$apply();
-				$(".alert").fadeOut(3000 );
+     			$scope.$apply();
+				$("#chatMessage").show();
+				$("#chatMessage").fadeOut(4000);
 			});
 
 			socket.on("banned", function(banRoom, banUser, userName){
-				if (SocketService.getUsername() === kickedUser){
-					$scope.popUpMessage = "You have been banned from this chat by " + userName + "!"
+				if (SocketService.getUsername() === banUser){
+					$scope.poppUpMessage = "You have been banned from this chat by " + userName + "!"
+					$location.path("/roomList");
 					$location.path("/roomList");
 				}
 				else{
-					$scope.popUpMessage = userName + " has been banned from the chat room by" + userName +  "!"
+					$scope.poppUpMessage = userName + " has been banned from the chat room by" + userName +  "!"
 				}
 				$scope.$apply();
-				$(".alert").fadeOut(3000 );
+				$("#chatMessage").show();
+				$("#chatMessage").fadeOut(4000);
 			});
 
 			socket.on("servermessage", function(msgType, room, userAfected){
-				if (msgType === "join"){
-					$scope.popUpMessage = userAfected + " has joined the chat room!";
+				if(SocketService.getUsername() !== userAfected){
+					if (msgType === "join"){
+						$scope.poppUpMessage = userAfected + " has joined the chat room!";
+					}
+					else if(msgType === "part"){
+						$scope.poppUpMessage = userAfected + " has left the chat room!";
+					}
+					else if(msgType === "quit"){
+						$scope.poppUpMessage = userAfected + " has left the chat!";
+					}
+					$scope.$apply();
+					$("#chatMessage").show();
+					$("#chatMessage").fadeOut(4000);
 				}
-				else if(msgType === "part"){
-					$scope.popUpMessage = userAfected + " has left the chat room!";
-				}
-				else if(msgType === "quit"){
-					$scope.popUpMessage = userAfected + " has left the chat!";
-				}
-				console.log("Server message");
-				console.log(msgType);
-				console.log(room);
-				console.log(userAfected);
-
-				$scope.$apply();
-				$(".alert").fadeOut(3000 );
-
-				//$scope.$apply();
-				// Poppa upp litlum glugga með skilaboðum um notanda sem hefur joinað, yfirgefið eða verið bannaður frá chatti 
 			});
 		}
 
@@ -122,7 +120,6 @@ angular.module("ChatApp").controller("RoomCtrl",
 			if(socket) {
 				socket.emit("partroom", $scope.roomName);
 				$location.path("/roomList");
-				console.log("LeaveRoom");
 			}
 		};
 
@@ -132,7 +129,6 @@ angular.module("ChatApp").controller("RoomCtrl",
 					if(allowed === false){ $scope.message = "You cannot kick this user from the chat room!";
 					}
 				});
-				console.log("kickUser: " + userName);
 			}
 		};
 
@@ -142,7 +138,6 @@ angular.module("ChatApp").controller("RoomCtrl",
 					if(allowed === false){ $scope.message = "You cannot ban this user for the chat room!";
 					}
 				});
-				console.log("banUser: " + userName);
 			}
 		};
 

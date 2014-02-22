@@ -1,6 +1,6 @@
 <div class="container">
 	<h1> {{ roomName }} </h1>
-	<h2> user logged in: {{userInRoom}} </h2>
+	<h3> user logged in: {{userInRoom}} </h3>
 	<div class="well">
 		<div class="row">
 
@@ -27,7 +27,6 @@
 						<button class="submit btn-link" data-toggle="modal" data-target="#privateMsgModal" ng-click="setPrivateMsgUser(user)" >
 						{{user }}
 						</button>
-
 
 						<!--Admin dropdown menu-->
 						<span class="btn-group pull-right">
@@ -62,7 +61,7 @@
 						      </div>
 					      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="submit" class="btn btn-primary" ng-click="sendPrivateMessage(privateMsgUser)">Send</button>
+				        <button type="submit" class="btn btn-primary" ng-click="sendPrivateMessage()">Send</button>
 				      </div>
 				    </div>
 				  </div>
@@ -84,8 +83,8 @@
 	    </button>
 	    <br>
 	    <br>
-		<div class="alert alert-error alert-dismissable" ng-bind="popUpMessage">
-  			<strong>Important message!</strong> <span ng-bind="popUpMessage"></span>!
+		<div class="alert alert-danger" id="chatMessage"> 
+  			<strong>Important message!</strong> <span ng-bind="poppUpMessage"></span>
 		</div>
 	    <br>
 	    <br>
