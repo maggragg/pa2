@@ -11,6 +11,7 @@ angular.module("ChatApp").controller("RoomCtrl",
         $scope.privateMsgUser = "";
         $scope.users = [];
         $scope.showBanKick = false; 
+        $scope.newTopic ="";
 
 		var socket = SocketService.getSocket();
 		var privateMsgUser = "";
@@ -169,6 +170,18 @@ angular.module("ChatApp").controller("RoomCtrl",
 				});
 			}
 		};
+
+		$scope.changeTopic = function() {
+			if(socket) {
+				socket.emit("settopic", {room: $scope.roomName, topic: $scope.newTopic}, function(allowed) {
+					if(allowed === false){ $scope.message = "You cannot topic on this room!";
+					}
+				console.log("Topic changed to " + $scope.newTopic);
+
+				});
+			}
+		};
+
 
 	}
 ]);
