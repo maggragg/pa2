@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         files: [
           // includes files within path
           {expand: true, src: ['views/*.html'], dest: 'dist/'},
+          {expand: true, src: ['css/*.css'], dest: 'dist/'},
           {expand: true, src: ['*.html'], dest: 'dist/'},
           {expand: true, src: ['bower_components/**'], dest: 'dist/'}
         ]
