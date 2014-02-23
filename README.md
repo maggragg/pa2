@@ -18,3 +18,5 @@ To serve this chatclient on port 8000 give this command:
 grunt connect
 
 Open your browser and go to localhost:8000.
+
+To send private message to other users in chat simply click on their usernames.
