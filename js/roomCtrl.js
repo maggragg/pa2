@@ -60,30 +60,30 @@ angular.module("ChatApp").controller("RoomCtrl",
 			// user beeing kicked from the room by operator of a room
 			socket.on("kicked", function(kickedRoom, kickedUser, userName){
 				if (SocketService.getUsername() === kickedUser){
-					$scope.poppUpMessage = "You have been kicked from this chat by " + userName + "!";
+					//$scope.poppUpMessage = "You have been kicked from this chat by " + userName + "!";
 					$location.path("/roomList");
 				}
-				else{
+				else if (SocketService.getUsername() !== userName){
 					$scope.poppUpMessage = kickedUser + " has been kicked from the chat room by" + userName + "!";
+					$scope.$apply();
+					$("#chatMessage").show();
+					$("#chatMessage").fadeOut(4000);
 				}
 
-				$scope.$apply();
-				$("#chatMessage").show();
-				$("#chatMessage").fadeOut(4000);
 			});
 
 			// user beeing banned from the room by operator of a room
 			socket.on("banned", function(banRoom, banUser, userName){
 				if (SocketService.getUsername() === banUser){
-					$scope.poppUpMessage = "You have been banned from this chat by " + userName + "!";
+					//$scope.poppUpMessage = "You have been banned from this chat by " + userName + "!";
 					$location.path("/roomList");
 				}
-				else{
+				else if (SocketService.getUsername() !== userName){
 					$scope.poppUpMessage = banUser + " has been banned from the chat room by" + userName +  "!";
+					$scope.$apply();
+					$("#chatMessage").show();
+					$("#chatMessage").fadeOut(4000);
 				}
-				$scope.$apply();
-				$("#chatMessage").show();
-				$("#chatMessage").fadeOut(4000);
 			});
 
 			// server messages handled

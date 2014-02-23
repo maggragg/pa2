@@ -34,8 +34,8 @@
 							Admin <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu"  >
-								<li ng-click="kickUser(user)">Kick {{user}}</li>
-								<li ng-click="banUser(user)">Ban {{user}}</li>
+								<li role="presentation" ng-click="kickUser(user)">Kick {{user}}</li>
+								<li role="presentation" ng-click="banUser(user)">Ban {{user}}</li>
 							</ul>
 						</span>
 						<!-- -->
@@ -87,12 +87,12 @@
 	    </button>
 	    <br>
 	    <br>
-		<div class="alert alert-danger" id="chatMessage"> 
-  			<strong>Important message!</strong> <span ng-bind="poppUpMessage"></span>
+		<div class="alert alert-info" id="chatMessage"> 
+  			<strong>Info from server!</strong> <span ng-bind="poppUpMessage"></span>
 		</div>
 	    <br>
 	    <br>
-		<div class="alert alert-info alert-dismissable" ng-repeat="alert in alerts">
+		<div class="alert alert-success alert-dismissable" ng-repeat="alert in alerts">
   			<button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="closeAlert($index)">&times;</button>
   			<strong>Private message!</strong> [{{alert.usr}}]: {{alert.msg}}
 		</div>
