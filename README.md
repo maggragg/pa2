@@ -7,9 +7,9 @@ If bower is not installed, give the command npm install -g bower.
 Installing: ( install.bat / install.sh will make next step automaticly )
 
 From the pa2 directory, give this commands on the command promt in this order
-npm install
-bower install
-grunt
+1. npm install
+2. bower install
+3. grunt
 
 To run chatserver on port 8080 give this command:
 node chatserver.js
