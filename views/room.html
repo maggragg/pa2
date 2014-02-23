@@ -1,5 +1,11 @@
 <div class="container">
 	<h1> {{ roomName }} </h1>
+		<span ng-show="showBanKick">
+		<input type="text" placeholder="New topic" ng-model="newTopic" />
+			<button type="submit" class=" btn btn-sm" ng-click="changeTopic()">
+				Change
+			</button>
+		</span>
 	<h3> user logged in: {{userInRoom}} </h3>
 	<div class="well">
 		<div class="row">

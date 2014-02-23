@@ -58,7 +58,7 @@ angular.module("ChatApp").controller("RoomListCtrl",
 		$scope.logOut = function(){
 			if(socket)
 			{
-				socket.emit("disconnect");
+				socket.emit("logout");
 				$location.path("/");
 			}
 		};
