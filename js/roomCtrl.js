@@ -14,6 +14,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 
 		var socket = SocketService.getSocket();
 		var privateMsgUser = "";
+		var roomTopic = $routeParams.roomName;
 
         $("#chatMessage").hide();
 
@@ -87,7 +88,7 @@ angular.module("ChatApp").controller("RoomCtrl",
 
 			// server messages handled
 			socket.on("servermessage", function(msgType, room, userAfected){
-				if(SocketService.getUsername() !== userAfected){
+				if(SocketService.getUsername() !== userAfected && room === roomTopic){
 					if (msgType === "join"){
 						$scope.poppUpMessage = userAfected + " has joined the chat room!";
 					}
